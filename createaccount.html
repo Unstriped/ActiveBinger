@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<title>Active Binger 2</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/md5.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/json.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBXMLHttpRequest.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBHelper.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/GenericHelper.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/MoSyncHelper.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js">
+
+	</script>
+
+	<script type="text/javascript">
+
+
+
+            // First initialise the helper object with the code, secret code 
+// and the generic helper
+var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", new GenericHelper());
+// use the md5 library provided to set the password
+helper.setPassword(hex_md5("StefanBinger"));
+
+
+
+
+</script>
+</head>
+<body>
+	<h1>Create an account</h1>
+	<form method="post" action='' method='get'>
+
+		 Username: <input type="text" name="firstname"><br>
+		 Password: <input type="password" name="pwd"><br>
+		 <input type="button" value="Create Account" onClick=createUser(this.form)>
+
+	</form>
+
+	<a href="startpage.html">
+		<button type="button">Back</button>
+	</a>
+	<script src="createuser.js"></script>
+
+</body>
+
+</html>
