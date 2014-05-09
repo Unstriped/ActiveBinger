@@ -1,3 +1,5 @@
+ 
+
 var name = sessionStorage.getItem("name");
 
 document.getElementById("userName").innerHTML = name;
@@ -67,7 +69,16 @@ function updateLocation(position) {
 
     if ((lastLat != null) && (lastLong != null)) {
     	var currentDistance = distance(latitude, longitude, lastLat, lastLong);
-    	distanceLeft -= currentDistance*1000;
+    	//distanceLeft -= currentDistance*1000;
+    	distanceLeft = 0;
+    	if(distanceLeft<=0){
+    		distanceLeft = 500.0;
+
+ 		jQuery.getScript("questions.js", function() {
+ 			
+ 		});
+			  		
+    	}
     	document.getElementById("currDist").innerHTML =
     	"Distance left: " + distanceLeft.toFixed(1) + " m";
 
