@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>Active Binger</title>
@@ -30,15 +30,18 @@
 <body>
 	<h1>Welcome to Active Binger</h1>
 
+
+
 	<form method="post" id="loginForm" action='' method='get'>
 
 		 Username: <input type="text" name="firstname"><br>
 		 Password: <input type="password" name="pwd"><br>
-		 <input type="button" id="login" value="Log in" onClick=testUser(this.form)>
+		 <input type="button" id="login" value="Log in" onClick=loginUser(this.form)>
 
 		 <!--Enables login with enter key -->
 
 		 <script>
+
 			$(document).ready(function(){
     			$('#loginForm').keypress(function(e){
       			if(e.keyCode==13)
@@ -50,15 +53,15 @@
 
 	</form>
 
+	
+		
 	<a href="createaccount.html">
 		<button type="button">Sign up</button>
 	</a>
 
 
+</body>
 
 		<script src="login.js"></script>
 
-
-
-</body>
 </html>

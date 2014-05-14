@@ -3,7 +3,8 @@ var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", ne
 helper.setPassword(hex_md5("StefanBinger"));
 
 
-function testUser(form){
+function loginUser(form){
+var passFail = false;
 var searchCondition = { };
 var firstName = form.firstname.value;
 var password = form.pwd.value;
@@ -19,15 +20,25 @@ helper.searchDocuments(searchCondition,"users", function(resp) {
 			else{
 				//Byt ut till text senare nubs helsningar past justbingit
 				alert("Fel lösen - buuu");
+				passFail = true;
+
+				break;
 			}
 		}
+	
 	}
+
+
+
+
 
 	if(logIn){
 		//alert("Nu åker du vidare till en annan sida");
 		sessionStorage.setItem("name",firstName);
 		location.href=("homepage.html");
 	}
-
+	else if(passFail == false){
+		alert("Vem tror du att du är? Skaffa ett konto.");
+	}
 });
 }

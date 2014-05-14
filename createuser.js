@@ -24,7 +24,8 @@ function createUser(form){
 	if(unique){
    	var userObject = {
     	"name" : firstName,
-    	"password" : password
+    	"password" : password,
+        "totPoints": 0
    	}
     helper.insertDocument("users", userObject, null, function(resp){
     	  

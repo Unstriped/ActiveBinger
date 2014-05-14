@@ -1,14 +1,45 @@
- 
+var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", new GenericHelper());
+// use the md5 library provided to set the password
+helper.setPassword(hex_md5("StefanBinger"));
+
+//Fetch username and score
 
 var name = sessionStorage.getItem("name");
 
 document.getElementById("userName").innerHTML = name;
 
+var searchCondition = { };
+var totPoints;
+var password;
+
+function updatePoints(){
+    helper.searchDocuments(searchCondition,"users", function(resp) {
+    for( I in resp.outputData){
+        var oneUser = resp.outputData[I];
+
+        if(name == oneUser.name){
+           totPoints = oneUser.totPoints;
+           document.getElementById("pointCounter").innerHTML = "Score: " + totPoints;
+           password = oneUser.password;
+
+        }
+    }
+
+            
+});
+
+}
+
+
+
+//Handle geo-tracking
+
+
 var totalDistance = 0.0;
-var distanceLeft = 500.0;
+var distanceLeft = 25.0;
 var lastLat;
 var lastLong;
-
+//var inQuestion = false;
 Number.prototype.toRadians = function() {
 	return this * Math.PI / 180;
 }
@@ -40,10 +71,10 @@ function updateStatus(message) {
 	document.getElementById("status").innerHTML = message;
 }
 
-function loadDemo() {
+function loadGeo() {
 	if(navigator.geolocation) {
 		updateStatus("HTML5 Geolocation is supported in your browser.");
-		navigator.geolocation.watchPosition(updateLocation,
+		id= navigator.geolocation.watchPosition(updateLocation,
 			handleLocationError,
 			{maximumAge:10000});
 	}
@@ -58,7 +89,7 @@ function updateLocation(position) {
 	document.getElementById("accuracy").innerHTML ="Accuracy: " + accuracy;
 
 
-    // sanity test... don't calculate distance if accuracy
+    // don't calculate distance if accuracy
     // value too large
     if (accuracy >= 500) {
     	updateStatus("Need more accurate values to calculate distance.");
@@ -66,19 +97,28 @@ function updateLocation(position) {
     }
 
     // calculate distance
-
-    if ((lastLat != null) && (lastLong != null)) {
+       if ((lastLat != null) && (lastLong != null)) {
     	var currentDistance = distance(latitude, longitude, lastLat, lastLong);
-    	//distanceLeft -= currentDistance*1000;
-    	distanceLeft = 0;
+ 
+       distanceLeft -= currentDistance*1000;
+       //distanceLeft = 0;
+      // var currentDistance = distanceLeft;
     	if(distanceLeft<=0){
-    		distanceLeft = 500.0;
-
- 		jQuery.getScript("questions.js", function() {
- 			
- 		});
+	       //inQuestion = true;
+           navigator.geolocation.clearWatch(id);
+ 		 $.getScript("questions.js") 
+            .done(function() {
+ 			    distanceLeft = 25.0;
+                
+                //inQuestion = false;
+ 		     })
+            .fail(function() {
+                alert("ERROR! WARNING WARNING");
+             });
 			  		
     	}
+
+
     	document.getElementById("currDist").innerHTML =
     	"Distance left: " + distanceLeft.toFixed(1) + " m";
 
