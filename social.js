@@ -2,39 +2,127 @@ var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", ne
 // use the md5 library provided to set the password
 helper.setPassword(hex_md5("StefanBinger"));
 
-function showSocial(){
 
+var firstName = sessionStorage.getItem("name");
+function showSocial(){
+	
 	if(showing){
-	$("#statusInfo").attr('style', 'display: block');
-	$("#socialDiv").attr('style', 'display: none');
-	showing = false;
+		$("#statusInfo").attr('style', 'display: block');
+		$("#socialDiv").attr('style', 'display: none');
+		showing = false;
 	}
 	else{
-	$("#socialDiv").attr('style', 'display: block');
-	$("#statusInfo").attr('style', 'display: none');
-	showing = true;
+		$("#socialDiv").attr('style', 'display: block');
+		$("#statusInfo").attr('style', 'display: none');
+		showing = true;
 	}
+
+
+
+}
+function showFriends(){
+	$("#scoreBoard table").empty();
+	$("#scoreBoard table").append("<tr><th>Name</td><th>Score</td></tr>");
+	var friendList =[];
+
+	var searchCondition = { };
+	helper.searchDocuments(searchCondition,"users", function(test) {
+		for( I in test.outputData){
+			var oneUser= test.outputData[I];
+			if(firstName == oneUser.name){							
+				var newFriend = { 'friendName' : oneUser.name , 'friendScore' : oneUser.totPoints};
+				friendList.push(newFriend);
+				break;
+			}
+
+		}
+		helper.searchDocuments(searchCondition,"friends", function(resp) {
+
+			for( I in resp.outputData){
+				var oneFriend = resp.outputData[I];
+				if(firstName == oneFriend.name){
+
+					for( J in test.outputData){
+						var oneUser = test.outputData[J];
+						if(oneFriend.friend== oneUser.name){
+							var newFriend = { 'friendName' : oneUser.name , 'friendScore' : oneUser.totPoints};
+							console.log(JSON.stringify(newFriend));
+							friendList.push(newFriend);
+							//$("#scoreBoard table").append("<tr><td>"+oneUser.name+"</td><td class='sort'>"+oneUser.totPoints+"</td><tr>");
+						}
+					}
+				}
+			}
+
+
+		friendList.sort(function(a,b){
+			var dCount = a.friendScore - b.friendScore;
+
+			if(dCount) return dCount;
+
+			var dName = a.friendName - b.friendName;
+			return dName;
+		});
+		friendList.reverse();
+		var i = friendList.length;
+		for(var sortCounter = 0; sortCounter < i; sortCounter++ ){
+			$("#scoreBoard table").append("<tr><td>"+friendList[sortCounter].friendName+"</td><td>"+friendList[sortCounter].friendScore+"</td><tr>");
+		}
+	});
+		});
+
+
 }
 
 function addFriend(){
 
-    var person = prompt("Add friend: ");
-    var searchCondition = { };
 
-    helper.searchDocuments(searchCondition,"users", function(resp) {
-    	var found = false;
-    	for( I in resp.outputData){
-    		var oneUser = resp.outputData[I];
-    		if(person == oneUser.name){
+	var person = prompt("Add friend: ");
+	var score = 0;
+	var searchCondition = { };
+	var found = false;
+	var friend = false;
+
+	helper.searchDocuments(searchCondition,"users", function(resp) {
+		for( I in resp.outputData){
+			var oneUser = resp.outputData[I];
+			if(person == oneUser.name){
     			//add friend
     			found = true;
-    			break;
-    		}
-		}
-		if(found==false){
-			alert("HAN FINNS INTEE");
-		}
-	});	
+    			score = oneUser.totPoints;    			
+    			 }
+    	}
+    	if(found==false){
+    		alert("HAN FINNS INTEE");
+    	}
 
+	helper.searchDocuments(searchCondition,"friends", function(resp) {
+		if(found==true){
+			for( I in resp.outputData){
+				var oneFriend = resp.outputData[I];
+				if(firstName == oneFriend.name && person == oneFriend.friend){
+					alert("NI ÄR JU REDAN VÄNNER");
+					friend = true;
+					break;
+				}
 
+			}
+
+			if(friend == false){
+				var userObject = {
+					"name" : firstName,
+					"friend" : person
+				}
+				helper.insertDocument("friends", userObject, null, function(resp){
+					alert("det blev en vän");
+					$("#scoreBoard table").append("<tr><td>"+person+"</td><td>"+score+"</td><tr>");
+					showFriends();
+
+				});
+			}
+		}
+
+	});
+
+	});
 }

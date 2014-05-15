@@ -42,7 +42,7 @@ function runQuestion(){
 			$("#quizDiv #answer3Div button").empty();
 			$("#quizDiv #answer4Div button").empty();
 
-			$("#geoData").attr('style', 'display: none');
+			$("#mainDiv").attr('style', 'display: none');
 			$("#quizDiv").attr('style', 'display: block');
 
 			$("#quizDiv #questionDiv").append("Fråga nr: "+(E+1)+" "+question+ "<br><br>");
@@ -108,7 +108,7 @@ function userAnswer(answer){
 	$("#quizDiv").attr('style', 'display: none');
 
 
-	$("#geoData").attr('style', 'display: block');
+	$("#mainDiv").attr('style', 'display: block');
  	distanceLeft = 25.0;
     loadGeo();
 
