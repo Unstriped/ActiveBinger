@@ -12,10 +12,11 @@
 	<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/MoSyncHelper.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="mobile-web-app-capable" content="yes">
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css">
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
+	<link rel="stylesheet" href="homepage.css">
 
 	<script type="text/javascript">
        // First initialise the helper object with the code, secret code 
@@ -30,27 +31,37 @@
 </head>
 
 <body onload="loadGeo()">
-	<div data-role="page" id="mainDiv" style="display: block">
+	<div data-role="page" class="header" id="mainDiv" style="display: block">
 
 			<div data-role="header" id="header">
-			<h1 id="userName"></h1>
-			<a class="homeButton" data-role="button" data-icon="grid" style="width: 120px; height: 30px" onclick="showSocial()">Highscore</a>
+	
+			<a class="homeButton" id="homeButton" data-role="button" data-icon="grid" style="width: 120px; height: 30px" onclick="showSocial()"></a>
+
+				<img id ="logo" src='images/activebinger.svg'></img>
+
+			</div>
 
 
-		</div>
 
-		<div id = "statusInfo">
-			<h2 id="pointCounter"> </h2>
 
-			<p id="status">HTML5 Geolocation is <strong>not</strong> supported in your browser.</p>
-			<h4 id="currDist">Distance left: 25 m</h4>
-			<br>
-			<h4 id="accuracy">?</h4>
-			<h4 id="totalDist">Total distance traveled: 0.0 km</h4>
+		<div class="container"	>	
+
+			<div id = "statusInfo">
+
+				<h2 id="pointCounter"> </h2>
+
+				<p id="status">HTML5 Geolocation is <strong>not</strong> supported in your browser.</p>
+				<h4 id="currDist">Distance left: 25 m</h4>
+				<br>
+				<h4 id="accuracy">?</h4>
+				<h4 id="totalDist">Total distance traveled: 0.0 km</h4>
+			</div>
+
 		</div>
 
 
 		<div id="socialDiv" style="display: none">
+
 			<h1>Social stuff</h1>
 
 			<div id="addFriendDiv"><button onclick="addFriend()">Add a friend!</button></div>
@@ -58,16 +69,24 @@
 			<div id="scoreBoard"><table id="scoreTable" class="tableSorter"></table></div>
 
 		</div>
-
-	
+		<div id="footer"> <p id="userName"></p>
+			</div>
 	</div>
 
 	<div data-role="page" id="quizDiv" style="display: none">
+		<div data-role="header" class="header" id="header">
+		<img id ="logo" src='images/activebinger.svg'></img>
+		<div class="clearBox"></div>
+		</div>
+	
 		<div id="questionDiv"></div>
-		<div id="answer1Div"><button onclick="userAnswer(1)"></button></div>
-		<div id="answer2Div"><button onclick="userAnswer(2)"></button></div>
-		<div id="answer3Div"><button onclick="userAnswer(3)"></button></div>
-		<div id="answer4Div"><button onclick="userAnswer(4)"></button></div>
+		<div class="answer" id="answer1Div"><button onclick="userAnswer(1)"></button></div>
+		<div class="answer" id="answer2Div"><button onclick="userAnswer(2)"></button></div>
+		<div class="clearBox"></div>
+		<div class="answer" id="answer3Div"><button onclick="userAnswer(3)"></button></div>
+		<div class="answer" id="answer4Div"><button onclick="userAnswer(4)"></button></div>
+		<div id="footer"> <p id="userName"></p>
+		</div>
 	</div>
 
 	

@@ -1,3 +1,4 @@
+
 var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", new GenericHelper());
 // use the md5 library provided to set the password
 helper.setPassword(hex_md5("StefanBinger"));
@@ -5,22 +6,29 @@ helper.setPassword(hex_md5("StefanBinger"));
 
 var firstName = sessionStorage.getItem("name");
 function showSocial(){
-	
+	$("#scoreBoard table").empty();
 	if(showing){
 		$("#statusInfo").attr('style', 'display: block');
 		$("#socialDiv").attr('style', 'display: none');
 		showing = false;
 	}
 	else{
+
+		showFriends();
+
 		$("#socialDiv").attr('style', 'display: block');
 		$("#statusInfo").attr('style', 'display: none');
 		showing = true;
+
 	}
 
 
 
 }
+
+//Visar scoreboard
 function showFriends(){
+
 	$("#scoreBoard table").empty();
 	$("#scoreBoard table").append("<tr><th>Name</td><th>Score</td></tr>");
 	var friendList =[];
@@ -46,7 +54,6 @@ function showFriends(){
 						var oneUser = test.outputData[J];
 						if(oneFriend.friend== oneUser.name){
 							var newFriend = { 'friendName' : oneUser.name , 'friendScore' : oneUser.totPoints};
-							console.log(JSON.stringify(newFriend));
 							friendList.push(newFriend);
 							//$("#scoreBoard table").append("<tr><td>"+oneUser.name+"</td><td class='sort'>"+oneUser.totPoints+"</td><tr>");
 						}
@@ -70,7 +77,7 @@ function showFriends(){
 		}
 	});
 		});
-
+	friendList =[];	
 
 }
 
@@ -116,6 +123,8 @@ function addFriend(){
 				helper.insertDocument("friends", userObject, null, function(resp){
 					alert("det blev en vän");
 					$("#scoreBoard table").append("<tr><td>"+person+"</td><td>"+score+"</td><tr>");
+
+					$("#scoreBoard table").empty();	
 					showFriends();
 
 				});

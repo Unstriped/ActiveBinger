@@ -1,6 +1,9 @@
 var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", new GenericHelper());
 // use the md5 library provided to set the password
 helper.setPassword(hex_md5("StefanBinger"));
+var name = sessionStorage.getItem("name");
+
+document.getElementById("userName").innerHTML = name;
 
 var answer1 = "";
 var answer2 = "";
@@ -99,9 +102,10 @@ function userAnswer(answer){
 
 		helper.updateDocument(update, searchCondition,"users",function(resp){
 
-		});
 
+		});
 		updatePoints();
+
 
 		}
 

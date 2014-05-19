@@ -6,9 +6,12 @@ helper.setPassword(hex_md5("StefanBinger"));
 
 function createUser(form){
 
- 	alert("försöker skapa användare");
     var firstName = form.firstname.value;
     var password = form.pwd.value;
+    if (firstName == "" || password == ""){
+    document.getElementById('loginError').innerHTML = "You must provide both username and password";
+        return;
+    }
 	var searchCondition = { };
 	var unique = true;
     helper.searchDocuments(searchCondition,"users", function(resp) {
@@ -29,13 +32,13 @@ function createUser(form){
    	}
     helper.insertDocument("users", userObject, null, function(resp){
     	  
- 			alert("skapade användare");
+ 			alert("Skapade Användare");
     	    location.href=("startpage.html");
     	    // window.location.reload();
     });
 	}
 else{
-	alert("Du måste välja ett unikt namn, mainstreamtönt");
+    document.getElementById('loginError').innerHTML = "Username already exists";
 
 }
 });

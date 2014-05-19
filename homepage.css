@@ -1,0 +1,66 @@
+
+.logo{
+	height: 80%;
+	margin-bottom: 3%;
+	margin-left:auto;
+	margin-right: auto;
+	position: absolute;
+
+}
+.header{
+	background-color: #33CCCC !important;
+	padding:1px !important;
+	margin:1px !important;
+	height:15% !important;
+}
+#homeButton{
+	position: relative !important;
+	margin-right: 5%;
+	height:40% !important;
+	width: 1% !important;
+	margin-bottom: 3% !important;
+}
+#mainDiv{
+	height: 100%;
+}
+
+.container{
+	text-align: center;
+}
+#footer{
+	padding-top: 1%;
+    position:fixed;
+    bottom:0;
+    height: 10%;
+	text-align: center;
+	background-color: #33CCCC;
+	width: 100%;
+}
+#footer p{
+	margin-top: 0px;
+	color: white;
+	font-size: 40px;
+}
+#answer1Div{
+	float:left;
+}
+#answer2Div{
+	float: right;
+
+}
+.clearBox{
+	clear:both;
+	height: 1px;
+	width: 1px;
+}
+#answer3Div{
+	float:left;
+
+}
+#answer4Div{
+	float: right;
+
+}
+.answer{
+	width: 40%;
+}

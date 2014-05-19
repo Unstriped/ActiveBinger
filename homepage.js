@@ -96,6 +96,13 @@ function updateLocation(position) {
     	return;
     }
 
+             $.getScript("questions.js") 
+            .done(function() {
+                distanceLeft = 25.0;
+                
+                //inQuestion = false;
+             })
+
     // calculate distance
        if ((lastLat != null) && (lastLong != null)) {
     	var currentDistance = distance(latitude, longitude, lastLat, lastLong);
@@ -106,7 +113,7 @@ function updateLocation(position) {
     	if(distanceLeft<=0){
 	       //inQuestion = true;
            navigator.geolocation.clearWatch(id);
- 		 $.getScript("questions.js") 
+ 		 /*$.getScript("questions.js") 
             .done(function() {
  			    distanceLeft = 25.0;
                 
@@ -115,7 +122,7 @@ function updateLocation(position) {
             .fail(function() {
                 alert("ERROR! WARNING WARNING");
              });
-			  		
+			 */ 		
     	}
 
 

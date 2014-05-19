@@ -8,6 +8,12 @@ var passFail = false;
 var searchCondition = { };
 var firstName = form.firstname.value;
 var password = form.pwd.value;
+ if (firstName == "" || password == ""){
+
+	document.getElementById('loginError').innerHTML = "You must provide both username and password";
+
+     return;
+ }
 helper.searchDocuments(searchCondition,"users", function(resp) {
 	var logIn = false;
 	for( I in resp.outputData){
@@ -19,7 +25,7 @@ helper.searchDocuments(searchCondition,"users", function(resp) {
 			}
 			else{
 				//Byt ut till text senare nubs helsningar past justbingit
-				alert("Fel lösen - buuu");
+				document.getElementById('loginError').innerHTML = "Wrong password";
 				passFail = true;
 
 				break;
@@ -38,7 +44,9 @@ helper.searchDocuments(searchCondition,"users", function(resp) {
 		location.href=("homepage.html");
 	}
 	else if(passFail == false){
-		alert("Vem tror du att du är? Skaffa ett konto.");
+
+		document.getElementById('loginError').innerHTML = "Username does not exist";
+		
 	}
 });
 }
