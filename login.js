@@ -43,10 +43,14 @@ helper.searchDocuments(searchCondition,"users", function(resp) {
 		sessionStorage.setItem("name",firstName);
 		location.href=("homepage.html");
 	}
+
+
 	else if(passFail == false){
 
 		document.getElementById('loginError').innerHTML = "Username does not exist";
 		
 	}
+
+
 });
 }

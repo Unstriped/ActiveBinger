@@ -3,7 +3,7 @@ var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", ne
 helper.setPassword(hex_md5("StefanBinger"));
 var name = sessionStorage.getItem("name");
 
-document.getElementById("userName").innerHTML = name;
+document.getElementById("userNameQuestion").innerHTML = name;
 
 var answer1 = "";
 var answer2 = "";
@@ -37,7 +37,7 @@ function runQuestion(){
 			answer4 = oneQuestion.answer4;
 
 			correct = oneQuestion.correct;
-
+			
 			$("#quizDiv #questionDiv").empty();
 
 			$("#quizDiv #answer1Div button").empty();
@@ -48,7 +48,7 @@ function runQuestion(){
 			$("#mainDiv").attr('style', 'display: none');
 			$("#quizDiv").attr('style', 'display: block');
 
-			$("#quizDiv #questionDiv").append("Fråga nr: "+(E+1)+" "+question+ "<br><br>");
+			$("#quizDiv #questionDiv").append("Fråga nr: "+(E+1)+"<br> "+question+ "<br><br>");
 
 			$("#quizDiv #answer1Div button").append(answer1);
 			$("#quizDiv #answer2Div button").append(answer2);
@@ -113,7 +113,8 @@ function userAnswer(answer){
 
 
 	$("#mainDiv").attr('style', 'display: block');
- 	distanceLeft = 25.0;
+ 	distanceLeft = startDistance;
+ 	barvar = startDistance;
     loadGeo();
 
 

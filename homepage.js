@@ -37,8 +37,11 @@ function updatePoints(){
 
 var totalDistance = 0.0;
 var distanceLeft = 25.0;
+var startDistance = 25.0;
 var lastLat;
 var lastLong;
+
+
 //var inQuestion = false;
 Number.prototype.toRadians = function() {
 	return this * Math.PI / 180;
@@ -96,33 +99,39 @@ function updateLocation(position) {
     	return;
     }
 
-             $.getScript("questions.js") 
-            .done(function() {
-                distanceLeft = 25.0;
-                
-                //inQuestion = false;
-             })
+
 
     // calculate distance
        if ((lastLat != null) && (lastLong != null)) {
     	var currentDistance = distance(latitude, longitude, lastLat, lastLong);
  
        distanceLeft -= currentDistance*1000;
+
+       var distanceWalked = 25-distanceLeft;
+    
+        console.log(distanceWalked);
+
+       var barvar = (-94+(distanceWalked*7.52));
+
+       console.log(barvar);
+        
+        $("#distanceBar img").attr('style', 'margin-left: '+barvar+'%');
+
+
        //distanceLeft = 0;
       // var currentDistance = distanceLeft;
     	if(distanceLeft<=0){
 	       //inQuestion = true;
            navigator.geolocation.clearWatch(id);
- 		 /*$.getScript("questions.js") 
+ 		 $.getScript("questions.js") 
             .done(function() {
- 			    distanceLeft = 25.0;
+ 			    distanceLeft = startDistance;
                 
                 //inQuestion = false;
  		     })
             .fail(function() {
                 alert("ERROR! WARNING WARNING");
-             });
-			 */ 		
+             });	
     	}
 
 
@@ -133,6 +142,8 @@ function updateLocation(position) {
 
     	document.getElementById("totalDist").innerHTML =
     	"Total distance traveled: " + totalDistance.toFixed(3) + " km";
+
+
     }
 
 

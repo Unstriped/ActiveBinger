@@ -2,6 +2,13 @@
 <html>
 <head>
 	<title>Active Binger</title>
+	<link rel="shortcut icon" href="images/wolf.ico"> 
+	
+
+	<!-- minimizing/hiding adressbar and prevents the user from zooming-->
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/CBHelper/md5.js"></script>
@@ -27,17 +34,19 @@
 		helper.setPassword(hex_md5("StefanBinger"));
 	</script>
 
+
 	
 </head>
 
 <body onload="loadGeo()">
-	<div data-role="page" class="header" id="mainDiv" style="display: block">
+	<div data-role="page" id="mainDiv" style="display: block">
 
-			<div data-role="header" id="header">
+			<div data-role="header" class="header" id="header">
 	
-			<a class="homeButton" id="homeButton" data-role="button" data-icon="grid" style="width: 120px; height: 30px" onclick="showSocial()"></a>
+			<a type="submit"class="homeButton" id="homeButton" data-role="button" style="width: 120px; height: 30px"  onclick="showSocial()">
+				<img id="buttonImage" src="images/Podium.png"  width="100%" height="100%"  /> </a>
 
-				<img id ="logo" src='images/activebinger.svg'></img>
+				<img class ="logo" src='images/activebinger.svg'></img>
 
 			</div>
 
@@ -52,9 +61,17 @@
 
 				<p id="status">HTML5 Geolocation is <strong>not</strong> supported in your browser.</p>
 				<h4 id="currDist">Distance left: 25 m</h4>
+
+
+				<div id="distanceBar" style="background-color: #00CC66" width="100%"><img src="images/wolf.png" width="6%" height="6%" style="margin-left: -94%"></div>
+
 				<br>
 				<h4 id="accuracy">?</h4>
 				<h4 id="totalDist">Total distance traveled: 0.0 km</h4>
+
+				
+
+
 			</div>
 
 		</div>
@@ -62,31 +79,34 @@
 
 		<div id="socialDiv" style="display: none">
 
-			<h1>Social stuff</h1>
-
-			<div id="addFriendDiv"><button onclick="addFriend()">Add a friend!</button></div>
+			<div id="addFriendDiv"><button onclick="addFriend()">Add a friend</button></div>
 
 			<div id="scoreBoard"><table id="scoreTable" class="tableSorter"></table></div>
 
+			<div id="logoutDiv"><button onclick="addFriend()">Add a friend</button></div>
+
+
 		</div>
-		<div id="footer"> <p id="userName"></p>
-			</div>
+
+
+
+		<div id="footer"> <p id="userName"></p></div>
 	</div>
 
 	<div data-role="page" id="quizDiv" style="display: none">
 		<div data-role="header" class="header" id="header">
-		<img id ="logo" src='images/activebinger.svg'></img>
-		<div class="clearBox"></div>
-		</div>
-	
+
+		<img class="logo" src='images/activebinger.svg'></img>
+				</div>
+	<div class="clearBox"></div>
+
 		<div id="questionDiv"></div>
-		<div class="answer" id="answer1Div"><button onclick="userAnswer(1)"></button></div>
-		<div class="answer" id="answer2Div"><button onclick="userAnswer(2)"></button></div>
+		<div class="answerDiv" id="answer1Div"><button class="answer" type="submit" onclick="userAnswer(1)"></button></div>
+		<div class="answerDiv" id="answer2Div"><button class="answer" type="submit" onclick="userAnswer(2)"></button></div>
 		<div class="clearBox"></div>
-		<div class="answer" id="answer3Div"><button onclick="userAnswer(3)"></button></div>
-		<div class="answer" id="answer4Div"><button onclick="userAnswer(4)"></button></div>
-		<div id="footer"> <p id="userName"></p>
-		</div>
+		<div class="answerDiv" id="answer3Div"><button class="answer" type="submit" onclick="userAnswer(3)"></button></div>
+		<div class="answerDiv" id="answer4Div"><button class="answer" type="submit" onclick="userAnswer(4)"></button></div>
+		<div id="footer"> <p id="userNameQuestion"></p></div>
 	</div>
 
 	

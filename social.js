@@ -9,15 +9,23 @@ function showSocial(){
 	$("#scoreBoard table").empty();
 	if(showing){
 		$("#statusInfo").attr('style', 'display: block');
+		$("#buttonImage").attr('src', 'images/Podium.png');
+
 		$("#socialDiv").attr('style', 'display: none');
+
+
 		showing = false;
 	}
 	else{
 
 		showFriends();
 
+
 		$("#socialDiv").attr('style', 'display: block');
+		$("#buttonImage").attr('src', 'images/wolf.png');
+
 		$("#statusInfo").attr('style', 'display: none');
+
 		showing = true;
 
 	}
