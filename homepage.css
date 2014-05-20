@@ -35,6 +35,10 @@
 	margin: 5%;
 }
 
+#logoutDiv{
+	width: 20%;
+	float: left;
+}
 
 #footer{
 	padding-top: 1%;

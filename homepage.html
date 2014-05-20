@@ -53,7 +53,7 @@
 
 
 
-		<div class="container"	>	
+		<div class="container">	
 
 			<div id = "statusInfo">
 
@@ -83,14 +83,12 @@
 
 			<div id="scoreBoard"><table id="scoreTable" class="tableSorter"></table></div>
 
-			<div id="logoutDiv"><button onclick="addFriend()">Add a friend</button></div>
-
-
 		</div>
 
 
 
-		<div id="footer"> <p id="userName"></p></div>
+		<div id="footer"> <div id="logoutDiv"><button class="ui-btn ui-icon-power ui-btn-icon-left" onclick="logOut()"></button></div>
+		<p id="userName"></p></div>
 	</div>
 
 	<div data-role="page" id="quizDiv" style="display: none">
@@ -120,6 +118,13 @@
 	<script>updatePoints();</script>
 
 	<script>showFriends();</script>
+
+	<script>function logOut(){
+		sessionStorage.clear();
+		location.href=("startpage.html");
+
+	}
+	</script>
 
 
 
