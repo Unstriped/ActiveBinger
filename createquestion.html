@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+	<title>Active Binger</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/md5.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/json.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBXMLHttpRequest.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBHelper.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/GenericHelper.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/MoSyncHelper.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css">
+	<link rel="stylesheet" href="startpage.css">
+
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+
+	<script type="text/javascript">
+
+
+
+            // First initialise the helper object with the code, secret code 
+// and the generic helper
+var helper = new CBHelper("activebinger", "0f3a3714db9f1a05a722b27a4782a0bc", new GenericHelper());
+// use the md5 library provided to set the password
+helper.setPassword(hex_md5("StefanBinger"));
+
+
+
+
+</script>
+</head>
+<body>
+	<img id ="logo" src='images/activebinger.svg'></img>
+
+<div id="container"><form class="form" method="get" id="questForm" action="">
+		 Question: <input type="text" name="question">
+		 Right answer: <input type="text" name="answer1">
+		 Wrong answer: <input type="text" name="answer2">
+		 Wrong answer: <input type="text" name="answer3">
+		 Wrong answer: <input type="text" name="answer4">
+
+
+		<input class="button" type="button" id="login" value="Create Question" onclick=createQuest(this.form)>
+
+
+	<script src="createquestion.js"></script>
+
+</body>
+
+</html>
