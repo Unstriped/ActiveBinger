@@ -36,7 +36,18 @@ function runQuestion(){
 			answer3 = oneQuestion.answer3;
 			answer4 = oneQuestion.answer4;
 
-			correct = oneQuestion.correct;
+			correct = answer1;
+
+
+			var templist = [answer1, answer2, answer3, answer4];
+
+			var shufflelist = shuffle(templist);
+			answer1 = shufflelist.pop();
+			answer2 = shufflelist.pop();
+			answer3 = shufflelist.pop();
+			answer4 = shufflelist.pop();
+
+
 			
 			$("#quizDiv #questionDiv").empty();
 
@@ -61,6 +72,11 @@ function runQuestion(){
 
 
 
+};
+
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
 };
 
 

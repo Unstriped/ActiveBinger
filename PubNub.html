@@ -1,0 +1,294 @@
+ <!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>PubNub</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <!--
+    Include the maps javascript with sensor=true because this code is using a
+    sensor (a GPS locator) to determine the user's location.
+    See: https://developers.google.com/maps/documentation/javascript/tutorial#Loading_the_Maps_API
+    -->
+
+
+
+<!-- JQuery libraries -->
+<script src="PubNub_files/jquery-latest.js" type="text/javascript"></script>
+<script src="PubNub_files/jquery-ui.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
+
+<!-- Bootstrap libraries -->
+<script src="PubNub_files/bootstrap.js"></script>
+<link href="PubNub_files/bootstrap-combined.css" rel="stylesheet">
+
+<!-- Custom css -->
+<link href="PubNub_files/pubnub.css" rel="stylesheet">
+
+<!-- Pubnub libraries -->
+<script src="PubNub_files/pubnub-3.js"></script>
+
+<!-- Pubnub credentials -->
+<script src="PubNub_files/cred.html"></script>
+
+
+<script>
+
+    // When the DOM is ready...
+    $(function() {
+
+      // Grab the elements
+      var input = $("#input");
+      var buttonSend = $("#buttonSend");
+      var joinRoom = $("#joinRoom");
+      var buttonHistory = $("#buttonHistory");
+      var output = $("#output");
+
+
+
+      console.log(chatRoom);
+
+      
+      // Init PubNub
+      var pubnub = PUBNUB.init({
+        publish_key   : "pub-c-90cb70a6-553b-4107-8ed0-15b6437fe7d4",
+        subscribe_key : "sub-c-7329d164-c48d-11e3-9f73-02ee2ddab7fe"
+      });
+
+
+      pubnub.subscribe({
+        'channel'   : chatRoom,
+        'callback'  : function(message) {
+
+          console.log("Chatroom: " + chatRoom);
+
+          output.html(output.html() + '<br/>' + message);
+        }
+
+      });
+
+
+
+      // receive messages
+      joinRoom.on('click', function() {
+
+
+
+       pubnub.unsubscribe({
+        channel: chatRoom
+       })
+      chatRoom = $('#dropdown').val();
+      
+      
+        pubnub.subscribe({
+        'channel'   : chatRoom,
+        'callback'  : function(message) {
+
+          console.log("Chatroom: " + chatRoom);
+
+          output.html(output.html() + '<br />' +  message);
+        }
+
+      });
+              var x=document.getElementById("activeRoom");
+      console.log(x.innerHTML = "Current Room: " + chatRoom);
+            var x=document.getElementById("output");
+          console.log(x.innerHTML = "");
+
+      });
+
+
+      // send messages
+      buttonSend.on('click', function() {
+        pubnub.publish({
+          'channel' : chatRoom,
+          'message' : userName+ " says: "+  input.val()
+        });
+        document.getElementById('output').scrollTop = 10000;
+        document.getElementById("input").value = "";
+      });
+
+      // check history
+      buttonHistory.on('click', function() {
+        output.html("");
+        pubnub.history({
+          count : 10,
+          channel : chatRoom,
+          callback : function (message) {
+            output.append(message[0].join("<br />"))
+          }
+        });
+      });
+
+    }); // $(function() {
+      </script>
+      
+      
+      
+    </head>
+
+
+
+    <body>
+    
+	
+      <div class="container">
+
+
+	
+        <p id="welcome-text">Welcome</p>
+
+	
+        <p id="location-text"> </p>
+	
+	<div id="userCreation">
+		
+	<form id="form" onsubmit="return false;">
+	<input  placeholder="Enter username here"type="text" id="userInput" />
+	<input  value="submit" type="submit" onclick="newUsername();" />
+</form>
+	
+	</div>
+	
+	<div id="chatContent" style="display:none">
+	
+  <div id="chooseRoom">
+	<select id="dropdown">
+          <option value ="Everywhere">Everywhere</option>
+          <option value ="KTH">KTH</option>
+          <option value ="Malmo">Malmö</option>
+          <option value ="Karlstad">Karlstad</option>
+
+
+          <option value ="Lappis">Lappis</option>
+        </select>
+	       <button id="joinRoom" class="btn">Join Room</button>
+       </div>
+
+        <p id="activeRoom">hej<p>
+        <div id="output" style="margin-top:10px"></div>
+ 
+
+            <input class="input-block-level" placeholder="Enter chat here" id="input" type="text">
+        <button id="buttonSend" class="btn">Send</button>
+        <!--<button id="buttonHistory" class="btn">History</button>-->
+        
+        <script>
+
+        var chatRoom = $('#dropdown').val();
+        var x=document.getElementById("activeRoom");
+          console.log(x.innerHTML = "Current Room: " + chatRoom);
+
+        $('#dropdown').change( function() {
+          console.log(chatRoom);
+
+
+
+        });
+
+  
+        </script>
+
+      </div>
+      
+      </div>
+
+    </body>
+    
+    
+    <script>
+
+function newUsername() {
+    document.getElementById("userCreation").style.display = "none"
+    userName = document.getElementById("userInput").value;
+
+    var x=document.getElementById("welcome-text");
+    console.log(x.innerHTML = "Welcome " + userName );
+
+    document.getElementById("chatContent").style.display = "block"
+}
+	
+</script>
+
+    <script>
+    $("#input").keyup(function(event){
+      if(event.keyCode == 13){
+        $("#buttonSend").click();
+      }
+    });
+    </script>
+
+        <script>
+    var x=document.getElementById("location-text");
+    function getLocation()
+    {
+      if (navigator.geolocation)
+      {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+      else{x.innerHTML = "Geolocation is not supported by this browser.";}
+    }
+    function showPosition(position)
+    {
+
+
+ 
+
+      if(position.coords.latitude <= 59.352559 && position.coords.latitude >= 59.345664 && position.coords.longitude <= 18.076053 && position.coords.longitude >= 18.064981){
+        console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude + "<br> KTH 4 LYF");
+        $("#dropdown").val('KTH');
+
+        }
+
+      else if(position.coords.latitude <= 55.641755 && position.coords.latitude >= 55.546310 && position.coords.longitude <= 13.112526 && position.coords.longitude >= 12.879753){
+        console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude + "<br> Akta er för danskarna");
+        $("#dropdown").val('Malmo');
+        }
+
+      else if(position.coords.latitude <= 59.434776 && position.coords.latitude >= 59.342469 && position.coords.longitude <= 13.612404 && position.coords.longitude >= 13.369331){
+        console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude + "<br> GÖTT");
+        $("#dropdown").val('Karlstad');
+        }
+
+
+      else{
+          console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude);
+            $("#dropdown").val('Everywhere');
+
+        }
+ 
+
+      $("#joinRoom").click();
+
+      
+    }
+
+    function showError(error)
+    {
+      switch(error.code)
+      {
+        case error.PERMISSION_DENIED:
+        x.innerHTML = "User denied the request for Geolocation."
+        break;
+        case error.POSITION_UNAVAILABLE:
+        x.innerHTML = "Location information is unavailable."
+        break;
+        case error.TIMEOUT:
+        x.innerHTML = "The request to get user location timed out."
+        break;
+        case error.UNKNOWN_ERROR:
+        x.innerHTML = "An unknown error occurred."
+        break;
+      }
+    }
+    getLocation();
+    </script>
+    
+
+    </html>
