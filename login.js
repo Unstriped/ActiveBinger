@@ -7,6 +7,7 @@ function loginUser(form){
 var passFail = false;
 var searchCondition = { };
 var firstName = form.firstname.value;
+firstName = firstName.toUpperCase();
 var password = form.pwd.value;
  if (firstName == "" || password == ""){
 

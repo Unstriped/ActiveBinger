@@ -103,13 +103,14 @@ function updateLocation(position) {
 
     // calculate distance
        if ((lastLat != null) && (lastLong != null)) {
+
     	var currentDistance = distance(latitude, longitude, lastLat, lastLong);
- 
+        
        distanceLeft -= currentDistance*1000;
 
        var distanceWalked = 25-distanceLeft;
     
-        console.log(distanceWalked);
+        //console.log(distanceWalked);
 
        var barvar = (-94+(distanceWalked*7.52));
 
@@ -118,16 +119,12 @@ function updateLocation(position) {
         $("#distanceBar img").attr('style', 'margin-left: '+barvar+'%');
 
 
-       //distanceLeft = 0;
-      // var currentDistance = distanceLeft;
     	if(distanceLeft<=0){
-	       //inQuestion = true;
            navigator.geolocation.clearWatch(id);
  		 $.getScript("questions.js") 
             .done(function() {
  			    distanceLeft = startDistance;
                 
-                //inQuestion = false;
  		     })
             .fail(function() {
                 alert("ERROR! WARNING WARNING");

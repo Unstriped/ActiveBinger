@@ -36,6 +36,9 @@
 
 <script>
 
+var userName = sessionStorage.getItem("name");
+
+
     // When the DOM is ready...
     $(function() {
 
@@ -88,7 +91,7 @@
 
           console.log("Chatroom: " + chatRoom);
 
-          output.html(output.html() + '<br />' +  message);
+          output.html(output.html() + '<br/>' +  message);
         }
 
       });
@@ -143,18 +146,20 @@
 	
         <p id="location-text"> </p>
 	
-	<div id="userCreation">
+<!--	<div id="userCreation">
 		
 	<form id="form" onsubmit="return false;">
 	<input  placeholder="Enter username here"type="text" id="userInput" />
 	<input  value="submit" type="submit" onclick="newUsername();" />
 </form>
 	
-	</div>
+	</div> -->
 	
-	<div id="chatContent" style="display:none">
+	<div id="chatContent" style="display:block">
 	
+  
   <div id="chooseRoom">
+
 	<select id="dropdown">
           <option value ="Everywhere">Everywhere</option>
           <option value ="KTH">KTH</option>
@@ -163,11 +168,14 @@
 
 
           <option value ="Lappis">Lappis</option>
-        </select>
+  </select>
+
 	       <button id="joinRoom" class="btn">Join Room</button>
        </div>
 
+
         <p id="activeRoom">hej<p>
+
         <div id="output" style="margin-top:10px"></div>
  
 
@@ -201,13 +209,12 @@
     <script>
 
 function newUsername() {
-    document.getElementById("userCreation").style.display = "none"
+
     userName = document.getElementById("userInput").value;
 
     var x=document.getElementById("welcome-text");
     console.log(x.innerHTML = "Welcome " + userName );
 
-    document.getElementById("chatContent").style.display = "block"
 }
 	
 </script>
@@ -220,75 +227,6 @@ function newUsername() {
     });
     </script>
 
-        <script>
-    var x=document.getElementById("location-text");
-    function getLocation()
-    {
-      if (navigator.geolocation)
-      {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      }
-      else{x.innerHTML = "Geolocation is not supported by this browser.";}
-    }
-    function showPosition(position)
-    {
-
-
- 
-
-      if(position.coords.latitude <= 59.352559 && position.coords.latitude >= 59.345664 && position.coords.longitude <= 18.076053 && position.coords.longitude >= 18.064981){
-        console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude + "<br> KTH 4 LYF");
-        $("#dropdown").val('KTH');
-
-        }
-
-      else if(position.coords.latitude <= 55.641755 && position.coords.latitude >= 55.546310 && position.coords.longitude <= 13.112526 && position.coords.longitude >= 12.879753){
-        console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude + "<br> Akta er för danskarna");
-        $("#dropdown").val('Malmo');
-        }
-
-      else if(position.coords.latitude <= 59.434776 && position.coords.latitude >= 59.342469 && position.coords.longitude <= 13.612404 && position.coords.longitude >= 13.369331){
-        console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude + "<br> GÖTT");
-        $("#dropdown").val('Karlstad');
-        }
-
-
-      else{
-          console.log(x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude);
-            $("#dropdown").val('Everywhere');
-
-        }
- 
-
-      $("#joinRoom").click();
-
-      
-    }
-
-    function showError(error)
-    {
-      switch(error.code)
-      {
-        case error.PERMISSION_DENIED:
-        x.innerHTML = "User denied the request for Geolocation."
-        break;
-        case error.POSITION_UNAVAILABLE:
-        x.innerHTML = "Location information is unavailable."
-        break;
-        case error.TIMEOUT:
-        x.innerHTML = "The request to get user location timed out."
-        break;
-        case error.UNKNOWN_ERROR:
-        x.innerHTML = "An unknown error occurred."
-        break;
-      }
-    }
-    getLocation();
-    </script>
     
 
-    </html>
+</html>

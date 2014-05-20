@@ -7,9 +7,10 @@ helper.setPassword(hex_md5("StefanBinger"));
 function createUser(form){
 
     var firstName = form.firstname.value;
+    firstName = firstName.toUpperCase();
     var password = form.pwd.value;
     if (firstName == "" || password == ""){
-    document.getElementById('loginError').innerHTML = "You must provide both username and password";
+    document.getElementById('creationError').innerHTML = "You must provide both username and password";
         return;
     }
 	var searchCondition = { };
@@ -38,7 +39,7 @@ function createUser(form){
     });
 	}
 else{
-    document.getElementById('loginError').innerHTML = "Username already exists";
+    document.getElementById('creationError').innerHTML = "Username already exists";
 
 }
 });

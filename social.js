@@ -124,9 +124,21 @@ function addFriend(){
 			}
 
 			if(friend == false){
+				var chatroom;
+
+				if(firstName<person){
+					chatroom = firstName+person;
+				}
+
+				else{
+					chatroom = person+firstName;
+
+				}
+
 				var userObject = {
 					"name" : firstName,
-					"friend" : person
+					"friend" : person,
+					"chatroom" : chatroom
 				}
 				helper.insertDocument("friends", userObject, null, function(resp){
 					alert("det blev en vän");
