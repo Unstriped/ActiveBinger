@@ -34,6 +34,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css">
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	<script src="chat.js"></script>
 
 	<link rel="stylesheet" href="homepage.css">
 
@@ -54,18 +55,14 @@ var userName = sessionStorage.getItem("name");
 
 
     // When the DOM is ready...
-    $(function() {
-
+ function chitchat(chatname) {
+     chatRoom=chatname;
       // Grab the elements
       var input = $("#input");
       var buttonSend = $("#buttonSend");
       var joinRoom = $("#joinRoom");
-      var buttonHistory = $("#buttonHistory");
+      var leaveRoom = $("#leaveRoom");
       var output = $("#output");
-
-
-
-      console.log(chatRoom);
 
       
       // Init PubNub
@@ -87,17 +84,13 @@ var userName = sessionStorage.getItem("name");
       });
 
 
-
+/*
       // receive messages
-      joinRoom.on('click', function() {
-
-
+     joinRoom.on('click', function() {
 
        pubnub.unsubscribe({
         channel: chatRoom
-       })
-      chatRoom = $('#dropdown').val();
-      
+       })     
       
         pubnub.subscribe({
         'channel'   : chatRoom,
@@ -115,31 +108,32 @@ var userName = sessionStorage.getItem("name");
           console.log(x.innerHTML = "");
 
       });
+    
+*/
+      leaveRoom.on('click', function(){
+      	console.log("hejdå");
+       pubnub.unsubscribe({
+        channel: chatRoom
+       });   
+      });
 
 
       // send messages
       buttonSend.on('click', function() {
-        pubnub.publish({
-          'channel' : chatRoom,
-          'message' : userName+ " says: "+  input.val()
-        });
-        document.getElementById('output').scrollTop = 10000;
-        document.getElementById("input").value = "";
-      });
 
-      // check history
-      buttonHistory.on('click', function() {
-        output.html("");
-        pubnub.history({
-          count : 10,
-          channel : chatRoom,
-          callback : function (message) {
-            output.append(message[0].join("<br />"))
-          }
-        });
-      });
+      	if(input.val!=""){
+        	pubnub.publish({
+          		'channel' : chatRoom,
+          		'message' : userName+ " says: "+  input.val()
+        	});
+        	document.getElementById('output').scrollTop = 10000;
+        	document.getElementById("input").value = "";
+      	}
+  	});
 
-    }); // $(function() {
+      
+
+    }; // $(function() {
       </script>
       
 
@@ -198,6 +192,7 @@ var userName = sessionStorage.getItem("name");
 				<!--//chatta här!!! #fun #swedishboy-->
 	<div id="chatContent" style="display:block">
 
+
 				<div id="output" style="margin-top:10px"></div>
  
 
@@ -206,8 +201,30 @@ var userName = sessionStorage.getItem("name");
 
 			</div>
 
-		</div>
 
+			    <script>
+    				$("#input").keyup(function(event){
+      				if(event.keyCode == 13){
+       				 $("#buttonSend").click();
+     				 }
+    			});
+    			</script>
+
+
+            	<button id="leaveRoom" class="btn" onclick='hideChat()'>Leave room</button>
+
+
+            	<script>
+            	function hideChat(){
+   
+            		$("#socialDiv #addFriendDiv").attr('style', 'display: block');
+					$("#socialDiv #scoreBoard").attr('style', 'display: block');
+					$("#socialDiv #chatDiv").attr('style', 'display: none');
+
+				}
+            	</script>
+		</div>
+	</div>
 
 
 		<div id="footer"> <div id="logoutDiv"><button class="ui-btn ui-icon-power ui-btn-icon-left" onclick="logOut()"></button></div>
