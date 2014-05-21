@@ -37,6 +37,8 @@ function showChat(chatname){
 	$("#socialDiv #scoreBoard").attr('style', 'display: none');
 	$("#socialDiv #chatDiv").attr('style', 'display: block');
 
+	chitchat(chatname);
+
 }
 
 //Visar scoreboard
@@ -86,7 +88,7 @@ function showFriends(){
 		friendList.reverse();
 		var i = friendList.length;
 		for(var sortCounter = 0; sortCounter < i; sortCounter++ ){
-			$("#scoreBoard table").append("<tr><td>"+friendList[sortCounter].friendName+"</td><td>"+friendList[sortCounter].friendScore+"</td><td id='joinRoom' onclick='showChat("+friendList[sortCounter].chat+")'>chat</td><tr>");
+			$("#scoreBoard table").append("<tr><td>"+friendList[sortCounter].friendName+"</td><td>"+friendList[sortCounter].friendScore+"</td><td id='joinRoom' onclick='showChat(\""+friendList[sortCounter].chat+"\")'>chat</td><tr>");
 		}
 	});
 		});
