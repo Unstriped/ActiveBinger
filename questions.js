@@ -31,10 +31,10 @@ function runQuestion(){
 
 			var question = oneQuestion.question;
 
-			answer1 = oneQuestion.answer1;
-			answer2 = oneQuestion.answer2;
-			answer3 = oneQuestion.answer3;
-			answer4 = oneQuestion.answer4;
+			answer1 = { 'answer' : oneQuestion.answer1 , 'check' : 1};
+			answer2 = { 'answer' : oneQuestion.answer2 , 'check' : 0};
+			answer3 = { 'answer' : oneQuestion.answer3 , 'check' : 0};
+			answer4 = { 'answer' : oneQuestion.answer4 , 'check' : 0};
 
 			correct = answer1;
 
@@ -61,10 +61,10 @@ function runQuestion(){
 
 			$("#quizDiv #questionDiv").append("Fråga nr: "+(E+1)+"<br> "+question+ "<br><br>");
 
-			$("#quizDiv #answer1Div button").append(answer1);
-			$("#quizDiv #answer2Div button").append(answer2);
-			$("#quizDiv #answer3Div button").append(answer3);
-			$("#quizDiv #answer4Div button").append(answer4);
+			$("#quizDiv #answer1Div button").append(answer1.answer);
+			$("#quizDiv #answer2Div button").append(answer2.answer);
+			$("#quizDiv #answer3Div button").append(answer3.answer);
+			$("#quizDiv #answer4Div button").append(answer4.answer);
 
 
 
@@ -84,38 +84,60 @@ function shuffle(o){ //v1.0
 function userAnswer(answer){
 
 	if(answer==1){
-		answer=answer1;
+		answer=answer1.answer;
+	}
+
+	else if(answer==2){
+		answer=answer2.answer;
+	}
+
+	else if(answer==3){
+		answer=answer3.answer;
+	}
+
+	else if(answer==4){
+		answer=answer4.answer;
+	}
+
+	console.log(answer);
+
+	if(answer1.check == 1){
 		document.getElementById("answer1Div").style.backgroundColor = 'green'; 
 		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
 		document.getElementById("answer3Div").style.backgroundColor = 'red';
 		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
 	}
 
-	else if(answer==2){
-		answer=answer2;
+	else if(answer2.check == 1){
 		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
 		document.getElementById("answer2Div").style.backgroundColor = 'green'; 
 		document.getElementById("answer3Div").style.backgroundColor = 'red';
 		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
 	}
 
-	else if(answer==3){
-		answer=answer3;
+	else if(answer3.check == 1){
 		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
 		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
 		document.getElementById("answer3Div").style.backgroundColor = 'green';
 		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
 	}
 
-	else if(answer==4){
-		answer=answer4;
+	else if(answer4.check == 1){
 		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
 		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
 		document.getElementById("answer3Div").style.backgroundColor = 'red';
 		document.getElementById("answer4Div").style.backgroundColor = 'green'; 
 	}
 
-	console.log(answer);
+
+
+
+
+
+
+
+
+
 
 	if(answer != correct){
 		alert("Fel!");
@@ -140,7 +162,7 @@ function userAnswer(answer){
 
 
 		}
-
+		document.onClick(){
 	$("#quizDiv").attr('style', 'display: none');
 
 
@@ -148,7 +170,7 @@ function userAnswer(answer){
  	distanceLeft = startDistance;
  	barvar = startDistance;
     loadGeo();
-
+	}
 
 
 };
