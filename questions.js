@@ -85,18 +85,34 @@ function userAnswer(answer){
 
 	if(answer==1){
 		answer=answer1;
+		document.getElementById("answer1Div").style.backgroundColor = 'green'; 
+		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer3Div").style.backgroundColor = 'red';
+		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
 	}
 
 	else if(answer==2){
 		answer=answer2;
+		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer2Div").style.backgroundColor = 'green'; 
+		document.getElementById("answer3Div").style.backgroundColor = 'red';
+		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
 	}
 
 	else if(answer==3){
 		answer=answer3;
+		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer3Div").style.backgroundColor = 'green';
+		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
 	}
 
 	else if(answer==4){
 		answer=answer4;
+		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer3Div").style.backgroundColor = 'red';
+		document.getElementById("answer4Div").style.backgroundColor = 'green'; 
 	}
 
 	console.log(answer);
