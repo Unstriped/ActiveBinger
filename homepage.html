@@ -163,7 +163,7 @@ var userName = sessionStorage.getItem("name");
 				<h2 id="pointCounter"> </h2>
 
 				<p id="status">HTML5 Geolocation is <strong>not</strong> supported in your browser.</p>
-				<h4 id="currDist">Distance left: 25 m</h4>
+				<h4 id="currDist">Distance left: 200 m</h4>
 
 
 				<div id="distanceBar" style="background-color: #00CC66" width="100%"><img src="images/wolf.png" width="6%" height="6%" style="margin-left: -94%"></div>
@@ -239,11 +239,11 @@ var userName = sessionStorage.getItem("name");
 	<div class="clearBox"></div>
 
 		<div id="questionDiv"></div>
-		<div class="answerDiv" id="answer1Div"><button class="answer" type="submit" onclick="userAnswer(1)"></button></div>
-		<div class="answerDiv" id="answer2Div"><button class="answer" type="submit" onclick="userAnswer(2)"></button></div>
+		<div class="answerDiv" id="answer1Div"><button class="answer" id="answer1Button" type="submit" onclick="userAnswer(1)"></button></div>
+		<div class="answerDiv" id="answer2Div"><button class="answer" id="answer2Button" type="submit" onclick="userAnswer(2)"></button></div>
 		<div class="clearBox"></div>
-		<div class="answerDiv" id="answer3Div"><button class="answer" type="submit" onclick="userAnswer(3)"></button></div>
-		<div class="answerDiv" id="answer4Div"><button class="answer" type="submit" onclick="userAnswer(4)"></button></div>
+		<div class="answerDiv" id="answer3Div"><button class="answer" id="answer3Button" type="submit" onclick="userAnswer(3)"></button></div>
+		<div class="answerDiv" id="answer4Div"><button class="answer" id="answer4Button" type="submit" onclick="userAnswer(4)"></button></div>
 		<div id="footer"> <p id="userNameQuestion"></p></div>
 	</div>
 

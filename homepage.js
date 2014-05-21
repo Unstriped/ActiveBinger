@@ -36,8 +36,8 @@ function updatePoints(){
 
 
 var totalDistance = 0.0;
-var distanceLeft = 25.0;
-var startDistance = 25.0;
+var distanceLeft = 200.0;
+var startDistance = 200.0;
 var lastLat;
 var lastLong;
 
@@ -108,11 +108,12 @@ function updateLocation(position) {
         
        distanceLeft -= currentDistance*1000;
 
-       var distanceWalked = 25-distanceLeft;
+       var distanceWalked = startDistance-distanceLeft;
     
         //console.log(distanceWalked);
+        var nummer = (184/startDistance)
 
-       var barvar = (-94+(distanceWalked*7.52));
+       var barvar = (-94+(distanceWalked*nummer));
 
        console.log(barvar);
         

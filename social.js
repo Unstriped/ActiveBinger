@@ -152,7 +152,6 @@ function addFriend(){
 					"chatroom" : chatroom
 				}
 				helper.insertDocument("friends", userObject, null, function(resp){
-					alert("det blev en vän");
 					$("#scoreBoard table").append("<tr><td>"+person+"</td><td>"+score+"</td><td onclick='showChat("+chatroom+")'>chat</td><tr>");
 
 					$("#scoreBoard table").empty();	

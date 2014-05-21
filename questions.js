@@ -36,7 +36,7 @@ function runQuestion(){
 			answer3 = { 'answer' : oneQuestion.answer3 , 'check' : 0};
 			answer4 = { 'answer' : oneQuestion.answer4 , 'check' : 0};
 
-			correct = answer1;
+			correct = answer1.answer;
 
 
 			var templist = [answer1, answer2, answer3, answer4];
@@ -102,31 +102,31 @@ function userAnswer(answer){
 	console.log(answer);
 
 	if(answer1.check == 1){
-		document.getElementById("answer1Div").style.backgroundColor = 'green'; 
-		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
-		document.getElementById("answer3Div").style.backgroundColor = 'red';
-		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer1Button").style.backgroundColor = 'green'; 
+		document.getElementById("answer2Button").style.backgroundColor = 'red'; 
+		document.getElementById("answer3Button").style.backgroundColor = 'red';
+		document.getElementById("answer4Button").style.backgroundColor = 'red'; 
 	}
 
 	else if(answer2.check == 1){
-		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
-		document.getElementById("answer2Div").style.backgroundColor = 'green'; 
-		document.getElementById("answer3Div").style.backgroundColor = 'red';
-		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer1Button").style.backgroundColor = 'red'; 
+		document.getElementById("answer2Button").style.backgroundColor = 'green'; 
+		document.getElementById("answer3Button").style.backgroundColor = 'red';
+		document.getElementById("answer4Button").style.backgroundColor = 'red'; 
 	}
 
 	else if(answer3.check == 1){
-		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
-		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
-		document.getElementById("answer3Div").style.backgroundColor = 'green';
-		document.getElementById("answer4Div").style.backgroundColor = 'red'; 
+		document.getElementById("answer1Button").style.backgroundColor = 'red'; 
+		document.getElementById("answer2Button").style.backgroundColor = 'red'; 
+		document.getElementById("answer3Button").style.backgroundColor = 'green';
+		document.getElementById("answer4Button").style.backgroundColor = 'red'; 
 	}
 
 	else if(answer4.check == 1){
-		document.getElementById("answer1Div").style.backgroundColor = 'red'; 
-		document.getElementById("answer2Div").style.backgroundColor = 'red'; 
-		document.getElementById("answer3Div").style.backgroundColor = 'red';
-		document.getElementById("answer4Div").style.backgroundColor = 'green'; 
+		document.getElementById("answer1Button").style.backgroundColor = 'red'; 
+		document.getElementById("answer2Button").style.backgroundColor = 'red'; 
+		document.getElementById("answer3Button").style.backgroundColor = 'red';
+		document.getElementById("answer4Button").style.backgroundColor = 'green'; 
 	}
 
 
@@ -140,11 +140,9 @@ function userAnswer(answer){
 
 
 	if(answer != correct){
-		alert("Fel!");
 	}
 
 	else{
-		alert("Bra jobbat!");
 		var searchCondition = {'name' : name };
 
 		totPoints = totPoints + 1;
@@ -162,7 +160,13 @@ function userAnswer(answer){
 
 
 		}
-		document.onClick(){
+		setTimeout(checkOut, 4000);
+function checkOut(){
+
+		document.getElementById("answer1Button").style.backgroundColor = 'white'; 
+		document.getElementById("answer2Button").style.backgroundColor = 'white'; 
+		document.getElementById("answer3Button").style.backgroundColor = 'white';
+		document.getElementById("answer4Button").style.backgroundColor = 'white'; 
 	$("#quizDiv").attr('style', 'display: none');
 
 
@@ -170,7 +174,7 @@ function userAnswer(answer){
  	distanceLeft = startDistance;
  	barvar = startDistance;
     loadGeo();
-	}
+}
 
 
 };
