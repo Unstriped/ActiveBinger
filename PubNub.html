@@ -190,7 +190,6 @@ var userName = sessionStorage.getItem("name");
           console.log(x.innerHTML = "Current Room: " + chatRoom);
 
         $('#dropdown').change( function() {
-          console.log(chatRoom);
 
 
 
@@ -204,20 +203,6 @@ var userName = sessionStorage.getItem("name");
       </div>
 
     </body>
-    
-    
-    <script>
-
-function newUsername() {
-
-    userName = document.getElementById("userInput").value;
-
-    var x=document.getElementById("welcome-text");
-    console.log(x.innerHTML = "Welcome " + userName );
-
-}
-	
-</script>
 
     <script>
     $("#input").keyup(function(event){

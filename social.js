@@ -30,7 +30,12 @@ function showSocial(){
 
 	}
 
+}
 
+function showChat(chatname){
+	$("#socialDiv #addFriendDiv").attr('style', 'display: none');
+	$("#socialDiv #scoreBoard").attr('style', 'display: none');
+	$("#socialDiv #chatDiv").attr('style', 'display: block');
 
 }
 
@@ -61,7 +66,7 @@ function showFriends(){
 					for( J in test.outputData){
 						var oneUser = test.outputData[J];
 						if(oneFriend.friend== oneUser.name){
-							var newFriend = { 'friendName' : oneUser.name , 'friendScore' : oneUser.totPoints};
+							var newFriend = { 'friendName' : oneUser.name , 'friendScore' : oneUser.totPoints, 'chat' : oneFriend.chatroom};
 							friendList.push(newFriend);
 							//$("#scoreBoard table").append("<tr><td>"+oneUser.name+"</td><td class='sort'>"+oneUser.totPoints+"</td><tr>");
 						}
@@ -81,7 +86,7 @@ function showFriends(){
 		friendList.reverse();
 		var i = friendList.length;
 		for(var sortCounter = 0; sortCounter < i; sortCounter++ ){
-			$("#scoreBoard table").append("<tr><td>"+friendList[sortCounter].friendName+"</td><td>"+friendList[sortCounter].friendScore+"</td><tr>");
+			$("#scoreBoard table").append("<tr><td>"+friendList[sortCounter].friendName+"</td><td>"+friendList[sortCounter].friendScore+"</td><td id='joinroom' onclick='showChat("+friendList[sortCounter].chat+")'>chat</td><tr>");
 		}
 	});
 		});
@@ -89,10 +94,12 @@ function showFriends(){
 
 }
 
+
 function addFriend(){
 
 
 	var person = prompt("Add friend: ");
+	person = person.toUpperCase();
 	var score = 0;
 	var searchCondition = { };
 	var found = false;
@@ -108,7 +115,8 @@ function addFriend(){
     			 }
     	}
     	if(found==false){
-    		alert("HAN FINNS INTEE");
+
+    		alert("HAN FINNS INTE");
     	}
 
 	helper.searchDocuments(searchCondition,"friends", function(resp) {
@@ -134,6 +142,7 @@ function addFriend(){
 					chatroom = person+firstName;
 
 				}
+				console.log(chatroom);
 
 				var userObject = {
 					"name" : firstName,
@@ -142,7 +151,7 @@ function addFriend(){
 				}
 				helper.insertDocument("friends", userObject, null, function(resp){
 					alert("det blev en vän");
-					$("#scoreBoard table").append("<tr><td>"+person+"</td><td>"+score+"</td><tr>");
+					$("#scoreBoard table").append("<tr><td>"+person+"</td><td>"+score+"</td><td onclick='showChat("+chatroom+")'>chat</td><tr>");
 
 					$("#scoreBoard table").empty();	
 					showFriends();
